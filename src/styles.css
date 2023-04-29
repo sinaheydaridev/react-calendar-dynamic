@@ -1,0 +1,187 @@
+.dynamic_calendar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 18.5rem;
+  font-family: sans-serif;
+}
+
+.dynamic_calendar__wrapper {
+  max-width: 21rem;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dynamic_calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 3rem;
+  margin-bottom: 0.5rem;
+  width: 20.86rem;
+}
+
+.dynamic_calendar__header button {
+  background-color: transparent;
+  border: none;
+}
+
+.dynamic_calendar__header__text {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dynamic_calendar__header__year {
+  margin-left: 1rem;
+}
+
+.dynamic_calendar__header__change_month_container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.dynamic_calendar__header__change_month_button {
+  padding: 0rem 1rem 0rem 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.dynamic_calendar__days__day {
+  width: 3rem;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  margin: 1rem 0rem;
+  position: relative;
+}
+
+.dynamic_calendar__days__label {
+  width: 3rem;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  margin: 1rem 0rem;
+  position: relative;
+}
+
+.dynamic_calendar__day_container {
+  width: 3rem;
+  display: inline-flex;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  font-size: 0.8rem;
+  line-height: 2.4rem;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.dynamic_calendar__day {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.dynamic_calendar__active_day {
+  color: #f31f1f;
+}
+
+.dynamic_calendar__start_day {
+  background-color: #363655 !important;
+  color: #ffffff;
+  border-radius: 50%;
+}
+
+.dynamic_calendar__start_day_bg::after {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  background-color: #87ceeb;
+  position: absolute;
+  right: 0;
+  opacity: 20%;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  z-index: -1;
+}
+
+.dynamic_calendar__end_day {
+  color: #ffffff;
+  background-color: #363655 !important;
+  border-radius: 50%;
+}
+
+.dynamic_calendar__end_day_bg::before {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  background-color: #87ceeb;
+  position: absolute;
+  left: 0;
+  opacity: 20%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  z-index: -1;
+}
+
+.dynamic_calendar__between_day {
+  position: relative;
+}
+
+.dynamic_calendar__between_day::after {
+  content: "";
+  width: 3rem;
+  height: 2rem;
+  background-color: #87ceeb;
+  position: absolute;
+  opacity: 20%;
+  z-index: -1;
+}
+
+.dynamic_calendar__disabled_day {
+  color: #b4b4b4;
+}
+
+.dynamic_calendar__day_skeleton {
+  background-color: #f3f3f3;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: default;
+}
+
+.dynamic_calendar__day_skeleton_container {
+  width: 3rem;
+  display: inline-flex;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  font-size: 0.8rem;
+  line-height: 2.4rem;
+  justify-content: center;
+  z-index: 1;
+}
+
+.dynamic_calendar__change_month_skeleton {
+  background-color: #f3f3f3;
+  width: 2rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  display: inline-block;
+  cursor: default;
+}
