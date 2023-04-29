@@ -13,14 +13,14 @@ A useful calendar for React app.
 
 ## Installation
 
-`npm install react-dynamic-calendar`
+`npm install react-calendar-dynamic`
 
 ## Usage
 
 ```js
 import { useState } from "react";
-import { DynamicCalendar } from "react-dynamic-calendar";
-import "react-dynamic-calendar/dist/styles.css";
+import { DynamicCalendar } from "react-calendar-dynamic";
+import "react-calendar-dynamic/dist/styles.css";
 
 const MyComponent = () => {
   const [date, setDate] = useState({ start: new Date(), end: new Date() });
