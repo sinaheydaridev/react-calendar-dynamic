@@ -113,7 +113,7 @@ const DynamicCalendar: FC<DynamicCalendarProps> = ({
     if (mode === "single") {
       onChange &&
         onChange({
-          start: s?.startOf("day").startOf("day").toDate() as Date,
+          start: e?.startOf("day").startOf("day").toDate() as Date,
           end: e?.endOf("day").startOf("day").toDate() as Date,
         });
       setStartDate(e);
