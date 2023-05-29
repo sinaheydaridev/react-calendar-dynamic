@@ -2,7 +2,6 @@ import { FC } from "react";
 import moment, { Moment } from "moment";
 
 import Day from "./Day";
-import * as utilDate from "./utils";
 
 export type DaysProps = {
   date: Moment;
@@ -60,10 +59,7 @@ const Days: FC<DaysProps> = ({
             .sort((a, b) => a.getTime() - b.getTime())
             .some((currentDate) => {
               return (
-                utilDate
-                  .getDateWithTimezone({ date: currentDate, timezone })
-                  .toDate()
-                  .toDateString() === moment(thisDate).toDate().toDateString()
+                currentDate.toDateString() === thisDate.toDate().toDateString()
               );
             })
         )}
