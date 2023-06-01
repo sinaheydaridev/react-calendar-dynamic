@@ -1,6 +1,6 @@
 {
   "name": "react-calendar-dynamic",
-  "version": "1.0.0",
+  "version": "1.5.5",
   "description": "A useful calendar for React app.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
