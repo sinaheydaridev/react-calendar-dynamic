@@ -33,50 +33,59 @@ const Day: FC<DayProps> = ({
   const classList: string[] = [];
 
   const isDayDisabled = useCallback(() => {
+    const min = utilDate.getDateWithTimezone({
+      date: minValue || undefined,
+      timezone,
+    });
+    const max = utilDate.getDateWithTimezone({
+      date: maxValue || undefined,
+      timezone,
+    });
+    const now = utilDate.getDateWithTimezone({
+      timezone,
+    });
     if (!minValue && !maxValue) return false;
     else {
       if (
         maxValue &&
-        utilDate.getDateWithTimezone({ date: maxValue, timezone }).date() <
-          date.date() &&
-        utilDate.yearFormat(date) === utilDate.yearFormat(moment()) &&
-        moment(date).month() === moment().month()
+        max.date() < date.date() &&
+        utilDate.yearFormat(date) === utilDate.yearFormat(now) &&
+        moment(date).month() === now.month()
       ) {
         return true;
       }
       if (
         !maxValue &&
-        minValue &&
-        utilDate.getDateWithTimezone({ date: minValue, timezone }).date() - 1 >=
-          date.date() &&
-        utilDate.yearFormat(date) === utilDate.yearFormat(moment()) &&
-        moment(date).month() === moment().month()
+        min &&
+        min.date() > date.date() &&
+        utilDate.yearFormat(date) === utilDate.yearFormat(now) &&
+        moment(date).month() === now.month()
       ) {
         return true;
       }
       if (
         !maxValue &&
-        minValue &&
-        utilDate.yearFormat(date) === utilDate.yearFormat(moment()) &&
-        moment(date).month() < moment().month()
+        min &&
+        utilDate.yearFormat(date) === utilDate.yearFormat(now) &&
+        moment(date).month() < now.month()
       ) {
         return true;
       } else if (
         !maxValue &&
-        minValue &&
-        utilDate.yearFormat(date) < utilDate.yearFormat(moment())
+        min &&
+        utilDate.yearFormat(date) < utilDate.yearFormat(now)
       ) {
         return true;
       }
       if (
         maxValue &&
-        utilDate.yearFormat(date) === utilDate.yearFormat(moment()) &&
-        moment(date).month() > moment().month()
+        utilDate.yearFormat(date) === utilDate.yearFormat(now) &&
+        moment(date).month() > now.month()
       ) {
         return true;
       } else if (
         maxValue &&
-        utilDate.yearFormat(date) > utilDate.yearFormat(moment())
+        utilDate.yearFormat(date) > utilDate.yearFormat(now)
       ) {
         return true;
       }
