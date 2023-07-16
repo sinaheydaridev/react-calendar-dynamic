@@ -1,4 +1,4 @@
-import { FC, useCallback, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import moment, { Moment } from "moment";
 
 import Days from "./Days";
@@ -46,50 +46,26 @@ const DynamicCalendar: FC<DynamicCalendarProps> = ({
   onChange,
   onChangeMonth,
 }) => {
-  const dateWithTimeZone = useCallback(
-    (currentDate?: Date) => {
-      if (value) {
-        return utilDate.getDateWithTimezone({
-          date: value,
-          timezone: String(timezone),
-        });
-      }
-      return utilDate.getDateWithTimezone({
-        date: currentDate || new Date(),
-        timezone: String(timezone),
-      });
-    },
-    [timezone, value]
-  );
-
-  const startDateWithTimeZone = useCallback(() => {
-    if (startValue) {
-      return moment(startValue);
-    }
-    return undefined;
-  }, [startValue]);
-
-  const endDateWithTimeZone = useCallback(() => {
-    if (endValue) {
-      return moment(endValue);
-    }
-    return undefined;
-  }, [endValue]);
-
-  const [date, setDate] = useState<Moment>(dateWithTimeZone());
+  const [date, setDate] = useState<Moment>(moment());
   const [startDate, setStartDate] = useState<Moment | undefined>(
-    startValue ? moment(startValue) : undefined
+    moment(startValue) || undefined
   );
   const [endDate, setEndDate] = useState<Moment | undefined>(
-    endValue ? moment(endValue) : undefined
+    moment(endValue) || undefined
   );
 
   const handleResetDate = () => {
-    setDate(dateWithTimeZone());
+    setDate(
+      utilDate.getDateWithTimezone({
+        date: new Date(),
+        timezone: String(timezone),
+      })
+    );
   };
 
   const handleChangeMonth = (month: number) => {
     setDate((prev) => moment(prev).month(month));
+    onChangeMonth && onChangeMonth(month);
   };
 
   const onChangeDate = (date: Moment) => {
@@ -130,26 +106,29 @@ const DynamicCalendar: FC<DynamicCalendarProps> = ({
   };
 
   useEffect(() => {
-    if (onChangeMonth) {
-      onChangeMonth(date.month() + 1);
+    if (value) {
+      setDate(moment(value));
     }
-  }, [date, onChangeMonth]);
+  }, [value]);
 
   useEffect(() => {
-    if (dateWithTimeZone()) {
-      setDate(dateWithTimeZone(new Date()));
+    if (timezone) {
+      utilDate.getDateWithTimezone({
+        date: new Date(),
+        timezone: timezone,
+      });
     }
-  }, [dateWithTimeZone]);
+  }, [timezone]);
 
   useEffect(() => {
-    if (startDateWithTimeZone() || endDateWithTimeZone()) {
-      setStartDate(startDateWithTimeZone() || undefined);
-      setEndDate(endDateWithTimeZone() || undefined);
+    if (startValue || endValue) {
+      setStartDate(moment(startValue) || undefined);
+      setEndDate(moment(endValue) || undefined);
     } else {
       setStartDate(undefined);
       setEndDate(undefined);
     }
-  }, [startDateWithTimeZone, endDateWithTimeZone]);
+  }, [endValue, startValue]);
 
   return (
     <div className="dynamic_calendar">
